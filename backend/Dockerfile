@@ -1,9 +1,9 @@
 FROM php:8.2-cli-alpine
 WORKDIR /app
 
-RUN apk add --no-cache postgresql-dev git \
+RUN apk add --no-cache postgresql-dev composer \
     && docker-php-ext-install pdo pdo_pgsql \
-    && git clone --depth 1 --branch v6.9.1 https://github.com /app/phpmailer
+    && composer require phpmailer/phpmailer
 
 COPY . .
 EXPOSE 8080
