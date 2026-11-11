@@ -1,6 +1,12 @@
 <?php
 ob_start();
 
+if (file_exists(__DIR__ . '/phpmailer/src/PHPMailer.php')) {
+    require_once __DIR__ . '/phpmailer/src/Exception.php';
+    require_once __DIR__ . '/phpmailer/src/PHPMailer.php';
+    require_once __DIR__ . '/phpmailer/src/SMTP.php';
+}
+
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
@@ -456,20 +462,37 @@ if (strpos($request_uri, 'shop') !== false && strpos($request_uri, 'update-shop'
 
 
 // ==========================================================================
-// ВСПОМОГАТЕЛЬНАЯ ФУНКЦИЯ ОТПРАВКИ 6-ЗНАЧНОГО КОДА ЧЕРЕЗ RESEND API
+// ОТПРАВКА 6-ЗНАЧНОГО КОДА ЧЕРЕЗ SMTP (ЯНДЕКС / MAIL.RU)
 // ==========================================================================
 function sendVerificationEmail($toEmail, $firstName, $code) {
-    $apiKey = getenv('RESEND_API_KEY') ?: '';
+    $smtpHost = getenv('SMTP_HOST') ?: ''; // smtp.yandex.ru или smtp.mail.ru
+    $smtpUser = getenv('SMTP_USER') ?: ''; // ваша_почта@yandex.ru или @mail.ru
+    $smtpPass = getenv('SMTP_PASS') ?: ''; // пароль приложения
 
-    if (empty($apiKey)) {
-        return true; // Заглушка, если ключ ещё не добавлен
+    if (empty($smtpHost) || empty($smtpUser) || empty($smtpPass)) {
+        return true; // Заглушка, если настройки ещё не добавлены на Render
     }
 
-    $payload = [
-        'from' => 'EcoMarket <onboarding@resend.dev>',
-        'to' => [$toEmail],
-        'subject' => 'Код подтверждения регистрации в EcoMarket 🍃',
-        'html' => "
+    $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
+
+    try {
+        $mail->isSMTP();
+        $mail->Host       = $smtpHost;
+        $mail->SMTPAuth   = true;
+        $mail->Username   = $smtpUser;
+        $mail->Password   = $smtpPass;
+        $mail->SMTPSecure = \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port       = 465;
+        $mail->CharSet    = 'UTF-8';
+
+        // Отправитель (обязательно должен совпадать с $smtpUser)
+        $mail->setFrom($smtpUser, 'EcoMarket');
+        // Получатель (любой email нового пользователя)
+        $mail->addAddress($toEmail, $firstName);
+
+        $mail->isHTML(true);
+        $mail->Subject = 'Код подтверждения регистрации в EcoMarket 🍃';
+        $mail->Body    = "
             <div style='font-family: Arial, sans-serif; padding: 20px; border: 1px solid #d8f3dc; border-radius: 12px; max-width: 480px;'>
                 <h2 style='color: #1b4332;'>Добро пожаловать в EcoMarket, {$firstName}! 🌿</h2>
                 <p style='color: #334155;'>Ваш проверочный код для завершения регистрации:</p>
@@ -478,21 +501,14 @@ function sendVerificationEmail($toEmail, $firstName, $code) {
                 </div>
                 <p style='font-size: 12px; color: #94a3b8;'>Если вы не регистрировались на нашей платформе, просто проигнорируйте это письмо.</p>
             </div>
-        "
-    ];
+        ";
 
-    $ch = curl_init('https://resend.com');
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'Authorization: Bearer ' . $apiKey,
-        'Content-Type: application/json'
-    ]);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload, JSON_UNESCAPED_UNICODE));
-    $response = curl_exec($ch);
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-    return $httpCode >= 200 && $httpCode < 300;
+        $mail->send();
+        return true;
+    } catch (\Exception $e) {
+        error_log("Ошибка отправки SMTP: " . $mail->ErrorInfo);
+        return false;
+    }
 }
 
 // ==========================================================================
