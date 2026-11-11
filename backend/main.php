@@ -456,21 +456,20 @@ if (strpos($request_uri, 'shop') !== false && strpos($request_uri, 'update-shop'
 
 
 // ==========================================================================
-// ВСПОМОГАТЕЛЬНАЯ ФУНКЦИЯ ОТПРАВКИ 6-ЗНАЧНОГО КОДА ЧЕРЕЗ BREVO API
+// ВСПОМОГАТЕЛЬНАЯ ФУНКЦИЯ ОТПРАВКИ 6-ЗНАЧНОГО КОДА ЧЕРЕЗ RESEND API
 // ==========================================================================
 function sendVerificationEmail($toEmail, $firstName, $code) {
-    $apiKey = getenv('BREVO_API_KEY') ?: '';
-    $senderEmail = getenv('SENDER_EMAIL') ?: 'noreply@ecomarket.ru';
+    $apiKey = getenv('RESEND_API_KEY') ?: '';
 
     if (empty($apiKey)) {
-        return true; // Заглушка, если ключ API ещё не добавлен в Render
+        return true; // Заглушка, если ключ ещё не добавлен
     }
 
     $payload = [
-        'sender' => ['name' => 'EcoMarket', 'email' => $senderEmail],
-        'to' => [['email' => $toEmail, 'name' => $firstName]],
+        'from' => 'EcoMarket <onboarding@resend.dev>',
+        'to' => [$toEmail],
         'subject' => 'Код подтверждения регистрации в EcoMarket 🍃',
-        'htmlContent' => "
+        'html' => "
             <div style='font-family: Arial, sans-serif; padding: 20px; border: 1px solid #d8f3dc; border-radius: 12px; max-width: 480px;'>
                 <h2 style='color: #1b4332;'>Добро пожаловать в EcoMarket, {$firstName}! 🌿</h2>
                 <p style='color: #334155;'>Ваш проверочный код для завершения регистрации:</p>
@@ -482,18 +481,16 @@ function sendVerificationEmail($toEmail, $firstName, $code) {
         "
     ];
 
-    $ch = curl_init('https://brevo.com');
+    $ch = curl_init('https://resend.com');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'accept: application/json',
-        'api-key: ' . $apiKey,
-        'content-type: application/json'
+        'Authorization: Bearer ' . $apiKey,
+        'Content-Type: application/json'
     ]);
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload, JSON_UNESCAPED_UNICODE));
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
 
     return $httpCode >= 200 && $httpCode < 300;
 }
