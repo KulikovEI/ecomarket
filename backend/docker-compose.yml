@@ -1,0 +1,32 @@
+services:
+  postgres_db:
+    image: postgres:15-alpine
+    container_name: eco_postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: user
+      POSTGRES_DB: ecomarket_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres_data:/var/lib/postgresql/data
+
+  php_backend:
+    build: .
+    container_name: eco_backend
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: postgres_db
+      DB_PORT: 5432
+      DB_USER: user
+      DB_PASSWORD: user
+      DB_NAME: ecomarket_db
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres_db
+
+volumes:
+  postgres_data:

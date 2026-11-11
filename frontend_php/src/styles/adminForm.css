@@ -1,0 +1,763 @@
+.admin-form-container {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  max-width: 600px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto 40px auto;
+}
+
+.admin-form-title {
+  margin: 0 0 5px 0;
+  color: #1b4332;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.admin-form-subtitle {
+  margin: 0 0 25px 0;
+  color: #666666;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.circular-categories-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap; /* Запрещаем перенос кнопок на вторую строку на ПК */
+    gap: 10px;
+    margin: 20px auto 28px auto;
+    padding: 0;
+    width: 100%;
+    background: transparent;
+    box-shadow: none;
+    box-sizing: border-box;
+}
+
+.category-toggle-btn {
+    flex: 1; /* Все вкладки делят ширину поровну */
+    padding: 10px 14px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    border-radius: 12px;
+    cursor: pointer;
+    border: none;
+    white-space: nowrap; /* Запрещаем перенос текста внутри кнопки */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.category-toggle-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.category-toggle-btn:not(.active):hover {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+.category-toggle-btn.active {
+    background: #2d6a4f;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(45, 106, 79, 0.18);
+}
+
+.vendor-shop-settings-form {
+    background: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-sizing: border-box;
+}
+
+.vendor-shop-settings-title {
+    margin: 0 0 5px 0;
+    color: #1b4332;
+    font-size: 1rem;
+    text-align: left;
+    font-weight: 700;
+}
+
+.vendor-shop-avatar-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+}
+
+.vendor-shop-logo-label {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #2d6a4f;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    transition: transform 0.2s ease;
+}
+
+.vendor-shop-logo-label:hover {
+    transform: scale(1.03);
+}
+
+.vendor-shop-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.vendor-shop-logo-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    font-size: 0.65rem;
+    text-align: center;
+    padding: 2px 0;
+    font-weight: 600;
+}
+
+.vendor-shop-inputs-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.vendor-shop-name-input {
+    padding: 8px 12px;
+    border: 1.5px solid #cbd5e1;
+    background-color: #ffffff;
+    color: #1e293b;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    width: 100%;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.vendor-shop-name-input:focus {
+    border-color: #2d6a4f;
+    box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.1);
+}
+
+.vendor-shop-desc-textarea {
+    padding: 8px 12px;
+    border: 1.5px solid #cbd5e1;
+    background-color: #ffffff;
+    color: #1e293b;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    width: 100%;
+    outline: none;
+    resize: none;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.vendor-shop-desc-textarea:focus {
+    border-color: #2d6a4f;
+    box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.1);
+}
+
+.vendor-shop-save-btn {
+    padding: 10px;
+    font-size: 0.85rem;
+    background: #2d6a4f;
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-sizing: border-box;
+}
+
+.vendor-shop-save-btn:hover {
+    background-color: #1b4332;
+}
+
+.vendor-shop-save-btn:active {
+    transform: scale(0.99);
+}
+
+/* ==========================================================================
+   ФОРМА ТОВАРОВ КАТАЛОГА (КЛАССИЧЕСКАЯ ДОБАВКА)
+   ========================================================================== */
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.admin-form-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.admin-form-input-group.flex-1 {
+  flex: 1;
+}
+
+.admin-form-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #1b4332;
+}
+
+.admin-toggle-cat-btn {
+  background: none;
+  border: none;
+  color: #2d6a4f;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.admin-toggle-cat-btn:hover {
+  color: #1b4332;
+}
+
+.admin-form-input,
+.admin-form-select,
+.admin-form-textarea {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #d8f3dc;
+  background-color: #f8fbf9;
+  font-size: 16px;
+  outline: none;
+  color: #333333;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-form-input:focus,
+.admin-form-select:focus,
+.admin-form-textarea:focus {
+  border-color: #2d6a4f;
+  box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.15);
+}
+
+.admin-form-select {
+  cursor: pointer;
+}
+
+.admin-form-textarea {
+  resize: none;
+  font-family: inherit;
+  line-height: 1.4;
+}
+
+.admin-form-submit-btn {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background-color: #2d6a4f;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.admin-form-submit-btn:hover {
+  background-color: #1b4332;
+}
+
+.admin-form-success-badge {
+  background-color: #d8f3dc;
+  color: #1b4332;
+  border: 1px solid #b7e4c7;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+
+.admin-orders-tab-zone {
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.admin-orders-section-title {
+    color: #1b4332;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+}
+
+.admin-orders-loading-text,
+.admin-orders-empty-text {
+    color: #94a3b8;
+    font-style: italic;
+    padding: 10px 0;
+}
+
+.admin-orders-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+/* Карточка одиночного заказа покупателя */
+.admin-order-management-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.01);
+}
+
+/* Шапка карточки заказа */
+.admin-order-management-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed #cbd5e1;
+    padding-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.admin-order-info-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.admin-order-number-lbl {
+    color: #1e293b;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.admin-order-date-lbl {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+/* Селектор переключения статусов */
+.admin-order-status-selector {
+    padding: 6px 10px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    outline: none;
+    cursor: pointer;
+    background: #ffffff;
+    color: #1e293b;
+    transition: all 0.2s ease;
+}
+
+.admin-order-status-selector:focus {
+    border-color: #2d6a4f;
+    box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.1);
+}
+
+/* Детали покупателя и доставки */
+.admin-order-customer-details {
+    font-size: 0.88rem;
+    color: #475569;
+    line-height: 1.45;
+    text-align: left;
+}
+
+/* Вложенный список товаров */
+.admin-order-items-mini-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: #ffffff;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #edf2f7;
+    box-sizing: border-box;
+}
+
+.admin-order-single-product-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #334155;
+    gap: 10px;
+}
+
+.admin-order-item-name {
+    text-align: left;
+}
+
+.admin-order-item-name strong {
+    color: #64748b;
+    margin-left: 4px;
+}
+
+.admin-order-item-subtotal {
+    font-weight: 700;
+    color: #1e293b;
+    white-space: nowrap;
+}
+
+/* Подвал карточки заказа */
+.admin-order-management-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding-top: 4px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.admin-order-total-co2 {
+    color: #2d6a4f;
+}
+
+.admin-order-final-price {
+    color: #1b4332;
+    font-size: 0.95rem;
+}
+
+.vendor-shop-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 4px;
+}
+
+.vendor-open-storefront-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    background-color: #e8f5e9;
+    color: #1b4332;
+    border: 1px solid #b7e4c7;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.12s ease;
+}
+
+.vendor-open-storefront-btn:hover {
+    background-color: #d8f3dc;
+    border-color: #2d6a4f;
+}
+
+.vendor-open-storefront-btn:active {
+    transform: scale(0.97);
+}
+
+.admin-image-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.admin-upload-file-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    background-color: #e8f5e9;
+    color: #1b4332;
+    border: 1px solid #b7e4c7;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.admin-upload-file-btn:hover {
+    background-color: #d8f3dc;
+    border-color: #2d6a4f;
+}
+
+.admin-image-preview-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 8px;
+    padding: 8px 12px;
+    background-color: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 10px;
+}
+
+.admin-image-preview-img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    padding: 4px;
+}
+
+.admin-clear-image-btn {
+    background-color: #fee2e2;
+    color: #ef4444;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.admin-clear-image-btn:hover {
+    background-color: #fca5a5;
+    color: #b91c1c;
+}
+
+@media (max-width: 768px) {
+
+     .admin-form-container {
+        margin: 15px auto ; 
+        padding: 20px 16px;
+        border-radius: 14px;
+        width: 100%; 
+        max-width: calc(100% - 24px) !important; 
+        box-sizing: border-box; 
+        float: none; 
+    }
+    .admin-form {
+        width: 100% ;
+        box-sizing: border-box ;
+    }
+
+    .admin-form-row {
+        flex-direction: column ;
+        gap: 14px ;
+        width: 100% ;
+    }
+    
+    .admin-form-input,
+    .admin-form-select,
+    .admin-form-textarea {
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .vendor-shop-settings-form {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .vendor-shop-avatar-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .vendor-shop-logo-label {
+        width: 80px;
+        height: 80px;
+    }
+
+    .vendor-shop-inputs-wrap {
+        gap: 10px;
+    }
+
+    .vendor-shop-name-input,
+    .vendor-shop-desc-textarea {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .vendor-shop-save-btn {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+  
+    .admin-form-container {
+        margin: 12px;
+        padding: 20px 16px;
+        border-radius: 14px;
+    }
+
+    .admin-form-title {
+        font-size: 1.35rem;
+    }
+
+    .admin-form-subtitle {
+        font-size: 0.85rem;
+        margin-bottom: 16px;
+    }
+
+    .admin-form-row {
+        flex-direction: column;
+        gap: 14px;
+    }
+    
+    .admin-form-input,
+    .admin-form-select,
+    .admin-form-textarea {
+        padding: 12px; 
+        font-size:  0.82rem;
+    }
+
+    .admin-form-submit-btn {
+        padding: 14px;
+        font-size: 0.95rem;
+    }
+
+    .category-toggle-btn {
+        flex: 1;
+        width: 100%;
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+
+    .admin-order-management-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .admin-order-status-selector {
+        width: 100%;
+        padding: 8px;
+    }
+    
+  .circular-categories-container {
+        display: flex !important;
+        gap: 10px !important;
+        justify-content: center !important; /* Выравниваем по левому краю для скролла */
+        overflow-x: auto !important; /* Включаем горизонтальную прокрутку */
+        padding: 4px 4px 12px 4px !important; /* Отступ снизу для красоты скроллбара */
+        margin: 15px 0 20px 0 !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        -webkit-overflow-scrolling: touch; /* Плавный инерционный скролл на iPhone/Android */
+    }
+
+    /* Скрываем стандартный некрасивый системный скроллбар браузера */
+    .circular-categories-container::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+/* Аккуратные компактные e-commerce кнопки-табы в один ряд */
+.category-toggle-btn {
+    flex: 0 0 auto !important; /* ЗАПРЕЩАЕМ кнопкам сжиматься и ломать текст */
+    width: auto !important;
+    max-width: none !important;
+    padding: 10px 16px !important; /* Комфортные паддинги для тапа пальцем */
+    font-size: 0.85rem !important; /* Компактный читабельный шрифт */
+    white-space: nowrap !important; /* НАМЕРТВО запрещаем перенос слов внутри кнопок */
+    border-radius: 12px !important;
+}
+    
+
+/* ИСПРАВЛЕНО: Ровное кроссбраузерное выравнивание строк */
+.admin-order-single-product-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important; 
+    font-size: 0.85rem !important;
+    color: #334155 !important;
+    gap: 10px !important;
+    width: 100% !important;
+}
+
+.admin-order-single-product-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    font-size: 0.85rem !important;
+    color: #334155 !important;
+    gap: 12px !important;
+    width: 100% !important;
+}
+
+.admin-order-item-name {
+    flex: 1 !important;
+    text-align: left !important;
+    word-break: break-word !important;
+}
+
+.admin-order-item-subtotal {
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    white-space: nowrap !important;
+    text-align: right !important;
+    padding-top: 1px !important;
+}
+
+.admin-order-item-qty {
+white-space: nowrap !important; /* Намертво блокирует перенос слова 'шт.' на новую строку */
+color: #64748b !important;
+font-weight: 700 !important;
+margin-left: 4px !important;
+display: inline-block !important;
+}
+
+.admin-order-management-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.admin-order-final-price {
+    align-self: flex-end;
+}
+
+    .vendor-shop-header-row {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.vendor-open-storefront-btn {
+    justify-content: center;
+    padding: 9px 12px;
+    font-size: 0.85rem;
+}
+}

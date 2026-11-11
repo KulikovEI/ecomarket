@@ -1,0 +1,231 @@
+.admin-users-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    margin: 20px auto;
+    max-width: 1200px;
+    box-sizing: border-box;
+}
+
+.admin-users-card h3 {
+    color: #1e293b;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.table-responsive-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+}
+
+.admin-users-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.admin-users-table th {
+    background: #f8fafc;
+    padding: 14px 16px;
+    color: #64748b;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.admin-users-table td {
+    padding: 16px;
+    border-bottom: 1px solid #edf2f7;
+    font-size: 0.9rem;
+    color: #334155;
+    vertical-align: middle;
+}
+
+.user-id-cell {
+    color: #94a3b8;
+    font-weight: 600;
+}
+
+.user-name-cell {
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.user-email-cell {
+    color: #64748b;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.status-badge.client {
+    background-color: #f1f5f9;
+    color: #475569;
+}
+
+.status-badge.vendor {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.admin-users-table input[type="text"] {
+    padding: 6px 12px;
+    color: #000;
+    background-color: #e2e8f0;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    width: 100%;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.admin-users-table input[type="text"]:focus {
+    border-color: #2d6a4f;
+    box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.1);
+}
+
+.role-toggle-btn {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.role-toggle-btn.to-vendor {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.role-toggle-btn.to-vendor:hover {
+    background-color: #2d6a4f;
+    color: #ffffff;
+}
+
+.role-toggle-btn.to-client {
+    background-color: #fee2e2;
+    color: #ef4444;
+}
+
+.role-toggle-btn.to-client:hover {
+    background-color: #ef4444;
+    color: #ffffff;
+}
+
+.admin-users-loading {
+    padding: 40px;
+    text-align: center;
+    color: #2d6a4f;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .table-responsive-wrapper {
+        border: none;
+        overflow-x: visible;
+    }
+
+    .admin-users-table thead, 
+    .admin-users-table tbody, 
+    .admin-users-table tr, 
+    .admin-users-table th, 
+    .admin-users-table td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .admin-users-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .admin-users-table tbody tr {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 16px;
+        margin-bottom: 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .admin-users-table td {
+        padding: 0 ;
+        border: none ;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        text-align: left;
+    }
+
+    .user-id-cell::before { content: "Идентификатор:"; }
+    .user-name-cell::before { content: "Пользователь:"; }
+    .user-email-cell::before { content: "Эл. почта:"; }
+    .admin-users-table td:nth-child(4)::before { content: "Текущий статус:"; }
+    .user-shop-cell::before { content: "Имя бренда:"; }
+
+    .admin-users-table td::before {
+        color: #64748b;
+        font-weight: 600;
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+
+    .user-name-cell {
+        color: #0f172a;
+        text-align: right;
+    }
+
+    .user-email-cell {
+        color: #0284c7;
+        word-break: break-all;
+        text-align: right;
+    }
+
+    .admin-users-table input[type="text"] {
+        max-width: 180px;
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+
+    .action-cell {
+        margin-top: 6px;
+        padding-top: 10px ;
+        border-top: 1px dashed #e2e8f0 ;
+    }
+
+    .action-cell::before {
+        display: none;
+    }
+
+    .role-toggle-btn {
+        width: 100%;
+        padding: 12px ;
+        font-size: 0.85rem;
+        text-align: center;
+        border-radius: 10px;
+    }
+}
