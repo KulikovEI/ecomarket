@@ -478,7 +478,7 @@ function sendVerificationEmail($toEmail, $firstName, $code) {
         "
     ];
 
-    $ch = curl_init('https://resend.com');
+    $ch = curl_init('https://api.resend.com/emails');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_TIMEOUT, 10);
@@ -609,6 +609,8 @@ if ($request_uri === '/api/verify-email' && $method === 'POST') {
     }
     exit();
 }
+
+
 // 4. Авторизация (POST /api/login)
 if ($request_uri === '/api/login' && $method === 'POST') {
     $email = trim(strtolower($input['email'] ?? ''));
