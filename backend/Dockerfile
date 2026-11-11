@@ -1,12 +1,9 @@
 FROM php:8.2-cli-alpine
 WORKDIR /app
 
-RUN apk add --no-cache postgresql-dev curl unzip \
+RUN apk add --no-cache postgresql-dev git \
     && docker-php-ext-install pdo pdo_pgsql \
-    && curl -L https://github.com -o phpmailer.zip \
-    && unzip phpmailer.zip \
-    && mv PHPMailer-6.9.1 /app/phpmailer \
-    && rm phpmailer.zip
+    && git clone --depth 1 --branch v6.9.1 https://github.com /app/phpmailer
 
 COPY . .
 EXPOSE 8080
