@@ -541,7 +541,6 @@ return (
             </div>
         )}
 
-         {/* ВКЛАДКА НАСТРОЕК БРЕНДА ПРОДАВЦА С КНОПКОЙ ПЕРЕХОДА НА ВИТРИНУ */}
         {activeTab === 'shop-settings' && user?.role === 'vendor' && (
             <form onSubmit={handleShopSubmit} className="vendor-shop-settings-form">
                 <div className="vendor-shop-header-row">

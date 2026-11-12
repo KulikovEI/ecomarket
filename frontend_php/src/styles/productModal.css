@@ -36,10 +36,28 @@
 }
 
 .product-modal-image-zone img {
-    width: 100%;
-    height: auto;
-    max-height: 350px;
-    object-fit: contain;
+  width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+  border-radius: 12px;
+  background-color: #f8fafc;
+  padding: 12px;
+  display: block;
+  margin: 0 auto;
+}
+
+.modal-discount-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #ef4444;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.35);
+  z-index: 2;
 }
 
 .product-modal-info-zone {
@@ -125,6 +143,20 @@
     font-size: 0.95rem;
     color: #1b4332;
     margin-bottom: 12px;
+}
+
+.modal-price-row {
+  display: flex;
+  align-items: baseline;
+  font-weight:bold;
+  gap: 10px;
+}
+
+.modal-old-price {
+  text-decoration: line-through;
+  color: #94a3b8;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .reviews-count-label {
@@ -310,19 +342,42 @@
     object-fit: contain;
 }
 
+.modal-discount-badge {
+    top: 2px;
+    left: 2px;
+    font-size: 11px;
+    padding: 2px 7px;
+}
+
+.modal-category-vendor-row{
+    flex-direction: column;
+    justify-content: center;
+}
+
 .product-modal-info-zone h2 {
     font-size: 1.15rem ; 
     margin: 2px 0 4px 0 ;
+    text-align: center;
     line-height: 1.25 ;
+}
+
+.modal-price-row {
+    gap: 8px;
+}
+
+  .modal-old-price {
+    font-size: 13px;
 }
 
 .vendor-modal-manifest-card {
     padding: 10px 12px ;
     margin: 6px 0 12px 0 ;
 }
+
 .vendor-manifest-title {
     font-size: 0.82rem ;
 }
+
 .vendor-manifest-text {
     font-size: 0.8rem ;
 }

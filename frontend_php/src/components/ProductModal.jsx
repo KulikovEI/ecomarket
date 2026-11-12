@@ -68,122 +68,135 @@ export default function ProductModal({ product, onClose }) {
 
                 <div className="product-modal-layout">
 
-                        <div className="product-modal-image-zone">
-                            <img src={product.image} alt={product.name} />
-                        </div>
-
-                        <div className="product-modal-info-zone">
-                            <div className="modal-category-vendor-row">
-                                <span className="product-category">{product.category}</span>
-                                <span className="product-vendor-badge">
-                                <img 
-                                    src={product.shopAvatar || '/images/default-avatar.png'} 
-                                    alt={product.shopName} 
-                                    className="product-vendor-avatar"
-                                    onError={(e) => {
-                                        e.target.onerror = null;
-                                        e.target.src = '/images/default-avatar.png'; 
-                                    }}
-                                />
-                                МАГАЗИН: {product.shopName || 'EcoMarket'}
-                            </span>
-                           </div>
-
-                            <h2>{product.name}</h2>
-
-                            {product.shopDescription && (
-                                <div className="vendor-modal-manifest-card">
-                                    <div className="vendor-manifest-title">
-                                        🌱 Описание бренда «{product.shopName}»:
-                                    </div>
-                                    <p className="vendor-manifest-text">
-                                        "{product.shopDescription}"
-                                    </p>
-                                </div>
-                            )}
-
-                            <div className="modal-rating-summary">
-                                <span className="rating-star-icon">⭐</span>
-                                <strong>{averageRating > 0 ? averageRating : 'Нет оценок'}</strong>
-                                <span className="reviews-count-label">({reviews.length} отзывов)</span>
-                            </div>
-
-                            <p className="product-modal-description">{product.description}</p>
-
-                            <div className="product-modal-meta-row">
-                                <div className="modal-price-wrap">
-                                    <span className="product-price">{product.price} ₽</span>
-                                </div>
-                                <span className="co2-badge" style={{ backgroundColor: product.carbonFootprint <= 0.1 ? '#2e7d32' : '#f57c00' }}>
-                                    CO₂: {product.carbonFootprint} кг
+                    <div className="product-modal-image-zone">
+                        <div className="modal-image-wrapper" style={{ position: 'relative' }}>
+                            {product.discount > 0 && (
+                                <span className="modal-discount-badge">
+                                    -{product.discount}%
                                 </span>
-                            </div>
-
-                            <button 
-                                className="addBtn" 
-                                style={{ marginTop: '15px' }}
-                                onClick={() => handleAddToCart(product)}
-                            >
-                                Добавить в корзину 🛒
-                            </button>
-
-                        <div className="product-reviews-section">
-                            <h3>Отзывы покупателей 💬</h3>
-
-                            {user ? (
-                                <form onSubmit={handleSubmit} className="add-review-form">
-                                    <div className="rating-selector-stars">
-                                        {[1, 2, 3, 4, 5].map((star) => (
-                                            <span
-                                                key={star}
-                                                className={`star-clickable ${ (hoveredRating || rating) >= star ? 'filled' : '' }`}
-                                                onClick={() => setRating(star)}
-                                                onMouseEnter={() => setHoveredRating(star)}
-                                                onMouseLeave={() => setHoveredRating(0)}
-                                            >
-                                                ★
-                                            </span>
-                                        ))}
-                                    </div>
-                                    <div style={{ display: 'flex', gap: '8px' }}>
-                                        <input className='input'
-                                            type="text" 
-                                            placeholder="Впечатления о товаре..."
-                                            value={reviewText}
-                                            onChange={(e) => setReviewText(e.target.value)}
-                                            required
-                                        />
-                                        <button type="submit" disabled={submitting}>
-                                            {submitting ? '...' : '➔'}
-                                        </button>
-                                    </div>
-                                </form>
-                            ) : (
-                                <p className="login-to-review-notice">Войдите в аккаунт, чтобы оставить отзыв.</p>
                             )}
-
-                            <div className="reviews-scroll-container">
-                                {reviews.length === 0 ? (
-                                    <p className="no-reviews-yet">Будьте первым, кто оставит отзыв к этому эко-товару! 🌱</p>
-                                ) : (
-                                    reviews.map((rev) => (
-                                        <div key={rev.id} className="user-review-item">
-                                            <div className="review-item-header">
-                                                <div className="review-author-wrap">
-                                                    <div className="review-author-avatar">
-                                                        <img src={rev.avatar || '/images/default-avatar.png'} alt="" />
-                                                    </div>
-                                                    <strong>{rev.firstName}</strong>
-                                                </div>
-                                                <span className="review-item-stars">{'★'.repeat(rev.rating)}</span>
-                                            </div>
-                                            <p>{rev.text}</p>
-                                        </div>
-                                    ))
-                                )}
-                            </div>
+                            <img src={product.image} alt={product.name} className="modal-image" />
                         </div>
                     </div>
+
+                    <div className="product-modal-info-zone">
+                        <div className="modal-category-vendor-row">
+                            <span className="product-category">{product.category}</span>
+                            <span className="product-vendor-badge">
+                            <img 
+                                src={product.shopAvatar || '/images/default-avatar.png'} 
+                                alt={product.shopName} 
+                                className="product-vendor-avatar"
+                                onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = '/images/default-avatar.png'; 
+                                }}
+                            />
+                            МАГАЗИН: {product.shopName || 'EcoMarket'}
+                        </span>
+                        </div>
+
+                        <h2>{product.name}</h2>
+
+                        {product.shopDescription && (
+                            <div className="vendor-modal-manifest-card">
+                                <div className="vendor-manifest-title">
+                                    🌱 Описание бренда «{product.shopName}»:
+                                </div>
+                                <p className="vendor-manifest-text">
+                                    "{product.shopDescription}"
+                                </p>
+                            </div>
+                        )}
+
+                        <div className="modal-rating-summary">
+                            <span className="rating-star-icon">⭐</span>
+                            <strong>{averageRating > 0 ? averageRating : 'Нет оценок'}</strong>
+                            <span className="reviews-count-label">({reviews.length} отзывов)</span>
+                        </div>
+
+                        <p className="product-modal-description">{product.description}</p>
+
+                        <div className="product-modal-meta-row">
+                            <div className="modal-price-wrap">
+                                <div className="modal-price-row">
+                                    <span className="modal-price">{product.price} ₽</span>
+                                    {product.oldPrice && product.oldPrice > product.price && (
+                                        <span className="modal-old-price">
+                                            {product.oldPrice} ₽
+                                        </span>
+                                    )}
+                                </div>
+                            </div>
+                            <span className="co2-badge" style={{ backgroundColor: product.carbonFootprint <= 0.1 ? '#2e7d32' : '#f57c00' }}>
+                                CO₂: {product.carbonFootprint} кг
+                            </span>
+                        </div>
+
+                        <button 
+                            className="addBtn" 
+                            style={{ marginTop: '15px' }}
+                            onClick={() => handleAddToCart(product)}
+                        >
+                            Добавить в корзину 🛒
+                        </button>
+
+                    <div className="product-reviews-section">
+                        <h3>Отзывы покупателей 💬</h3>
+                        {user ? (
+                            <form onSubmit={handleSubmit} className="add-review-form">
+                                <div className="rating-selector-stars">
+                                    {[1, 2, 3, 4, 5].map((star) => (
+                                        <span
+                                            key={star}
+                                            className={`star-clickable ${ (hoveredRating || rating) >= star ? 'filled' : '' }`}
+                                            onClick={() => setRating(star)}
+                                            onMouseEnter={() => setHoveredRating(star)}
+                                            onMouseLeave={() => setHoveredRating(0)}
+                                        >
+                                            ★
+                                        </span>
+                                    ))}
+                                </div>
+                                <div style={{ display: 'flex', gap: '8px' }}>
+                                    <input className='input'
+                                        type="text" 
+                                        placeholder="Впечатления о товаре..."
+                                        value={reviewText}
+                                        onChange={(e) => setReviewText(e.target.value)}
+                                        required
+                                    />
+                                    <button type="submit" disabled={submitting}>
+                                        {submitting ? '...' : '➔'}
+                                    </button>
+                                </div>
+                            </form>
+                        ) : (
+                            <p className="login-to-review-notice">Войдите в аккаунт, чтобы оставить отзыв.</p>
+                        )}
+
+                        <div className="reviews-scroll-container">
+                            {reviews.length === 0 ? (
+                                <p className="no-reviews-yet">Будьте первым, кто оставит отзыв к этому эко-товару! 🌱</p>
+                            ) : (
+                                reviews.map((rev) => (
+                                    <div key={rev.id} className="user-review-item">
+                                        <div className="review-item-header">
+                                            <div className="review-author-wrap">
+                                                <div className="review-author-avatar">
+                                                    <img src={rev.avatar || '/images/default-avatar.png'} alt="" />
+                                                </div>
+                                                <strong>{rev.firstName}</strong>
+                                            </div>
+                                            <span className="review-item-stars">{'★'.repeat(rev.rating)}</span>
+                                        </div>
+                                        <p>{rev.text}</p>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    </div>
+                </div>
                 </div>
             </motion.div>
         </div>

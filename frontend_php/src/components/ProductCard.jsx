@@ -89,19 +89,36 @@ const ProductCard = memo(function ProductCard({ product, index, hideDelete = fal
           </div>
 
           <div className="product-info">
-            
            <div className="product-text-content">
-
-                 <div className="product-card-meta-row">
-                    <span className="product-category" title={product.category}>
+               <div 
+                    className="product-card-meta-row" 
+                    style={{ 
+                        display: 'flex', 
+                        flexDirection: 'column', 
+                        alignItems: 'center', 
+                        gap: '6px', 
+                        width: '100%',
+                        marginTop: '-13px'
+                    }}
+                >
+                    <span 
+                        className="product-category" 
+                        title={product.category}
+                        style={{ 
+                            maxWidth: '100%', 
+                            whiteSpace: 'nowrap', 
+                            overflow: 'hidden', 
+                            textOverflow: 'ellipsis' 
+                        }}
+                    >
                         {product.category}
                     </span>
-                    
                     <Link 
                         to={`/shop/${product.vendorId || 1}`}
                         onClick={(e) => e.stopPropagation()}
                         className="product-vendor-badge product-vendor-link"
                         title={`Перейти на витрину магазина «${product.shopName || 'EcoMarket'}»`}
+                        style={{ maxWidth: '100%' }}
                     >
                         <img 
                             src={product.shopAvatar || '/images/default-avatar.png'} 

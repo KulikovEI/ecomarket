@@ -29,7 +29,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    flex-wrap: nowrap; /* Запрещаем перенос кнопок на вторую строку на ПК */
+    flex-wrap: nowrap; 
     gap: 10px;
     margin: 20px auto 28px auto;
     padding: 0;
@@ -40,14 +40,14 @@
 }
 
 .category-toggle-btn {
-    flex: 1; /* Все вкладки делят ширину поровну */
+    flex: 1; 
     padding: 10px 14px;
     font-weight: 700;
     font-size: 0.85rem;
     border-radius: 12px;
     cursor: pointer;
     border: none;
-    white-space: nowrap; /* Запрещаем перенос текста внутри кнопки */
+    white-space: nowrap; 
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -201,9 +201,6 @@
     transform: scale(0.99);
 }
 
-/* ==========================================================================
-   ФОРМА ТОВАРОВ КАТАЛОГА (КЛАССИЧЕСКАЯ ДОБАВКА)
-   ========================================================================== */
 .admin-form {
   display: flex;
   flex-direction: column;
@@ -331,7 +328,6 @@
     width: 100%;
 }
 
-/* Карточка одиночного заказа покупателя */
 .admin-order-management-card {
     background: #f8fafc;
     border: 1px solid #e2e8f0;
@@ -344,7 +340,6 @@
     box-shadow: 0 2px 6px rgba(15, 23, 42, 0.01);
 }
 
-/* Шапка карточки заказа */
 .admin-order-management-header {
     display: flex;
     justify-content: space-between;
@@ -372,7 +367,6 @@
     color: #94a3b8;
 }
 
-/* Селектор переключения статусов */
 .admin-order-status-selector {
     padding: 6px 10px;
     border: 1.5px solid #cbd5e1;
@@ -391,7 +385,6 @@
     box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.1);
 }
 
-/* Детали покупателя и доставки */
 .admin-order-customer-details {
     font-size: 0.88rem;
     color: #475569;
@@ -399,7 +392,6 @@
     text-align: left;
 }
 
-/* Вложенный список товаров */
 .admin-order-items-mini-list {
     display: flex;
     flex-direction: column;
@@ -435,7 +427,6 @@
     white-space: nowrap;
 }
 
-/* Подвал карточки заказа */
 .admin-order-management-footer {
     display: flex;
     justify-content: space-between;
@@ -669,36 +660,32 @@
   .circular-categories-container {
         display: flex !important;
         gap: 10px !important;
-        justify-content: center !important; /* Выравниваем по левому краю для скролла */
-        overflow-x: auto !important; /* Включаем горизонтальную прокрутку */
-        padding: 4px 4px 12px 4px !important; /* Отступ снизу для красоты скроллбара */
+        justify-content: center !important; 
+        overflow-x: auto !important; 
+        padding: 4px 4px 12px 4px !important; 
         margin: 15px 0 20px 0 !important;
         width: 100% !important;
         box-sizing: border-box;
-        -webkit-overflow-scrolling: touch; /* Плавный инерционный скролл на iPhone/Android */
+        -webkit-overflow-scrolling: touch; 
     }
 
-    /* Скрываем стандартный некрасивый системный скроллбар браузера */
     .circular-categories-container::-webkit-scrollbar {
         display: none !important;
         width: 0 !important;
         height: 0 !important;
     }
 
-/* Аккуратные компактные e-commerce кнопки-табы в один ряд */
-.category-toggle-btn {
-    flex: 0 0 auto !important; /* ЗАПРЕЩАЕМ кнопкам сжиматься и ломать текст */
+    .category-toggle-btn {
+    flex: 0 0 auto !important; 
     width: auto !important;
     max-width: none !important;
-    padding: 10px 16px !important; /* Комфортные паддинги для тапа пальцем */
-    font-size: 0.85rem !important; /* Компактный читабельный шрифт */
-    white-space: nowrap !important; /* НАМЕРТВО запрещаем перенос слов внутри кнопок */
+    padding: 10px 16px !important; 
+    font-size: 0.85rem !important; 
+    white-space: nowrap !important; 
     border-radius: 12px !important;
-}
-    
+    }
 
-/* ИСПРАВЛЕНО: Ровное кроссбраузерное выравнивание строк */
-.admin-order-single-product-row {
+    .admin-order-single-product-row {
     display: flex !important;
     justify-content: space-between !important;
     align-items: flex-start !important; 
@@ -706,9 +693,9 @@
     color: #334155 !important;
     gap: 10px !important;
     width: 100% !important;
-}
+    }
 
-.admin-order-single-product-row {
+    .admin-order-single-product-row {
     display: flex !important;
     justify-content: space-between !important;
     align-items: flex-start !important;
@@ -716,48 +703,48 @@
     color: #334155 !important;
     gap: 12px !important;
     width: 100% !important;
-}
+    }
 
-.admin-order-item-name {
+    .admin-order-item-name {
     flex: 1 !important;
     text-align: left !important;
     word-break: break-word !important;
-}
+    }
 
-.admin-order-item-subtotal {
+    .admin-order-item-subtotal {
     font-weight: 700 !important;
     color: #1e293b !important;
     white-space: nowrap !important;
     text-align: right !important;
     padding-top: 1px !important;
-}
+    }
 
-.admin-order-item-qty {
-white-space: nowrap !important; /* Намертво блокирует перенос слова 'шт.' на новую строку */
-color: #64748b !important;
-font-weight: 700 !important;
-margin-left: 4px !important;
-display: inline-block !important;
-}
+    .admin-order-item-qty {
+    white-space: nowrap !important; 
+    color: #64748b !important;
+    font-weight: 700 !important;
+    margin-left: 4px !important;
+    display: inline-block !important;
+    }
 
-.admin-order-management-footer {
+    .admin-order-management-footer {
     flex-direction: column;
     align-items: flex-start;
     gap: 4px;
-}
+    }
 
-.admin-order-final-price {
+    .admin-order-final-price {
     align-self: flex-end;
-}
+    }
 
     .vendor-shop-header-row {
     flex-direction: column;
     align-items: stretch;
-}
+    }
 
-.vendor-open-storefront-btn {
+    .vendor-open-storefront-btn {
     justify-content: center;
     padding: 9px 12px;
     font-size: 0.85rem;
-}
+    }
 }

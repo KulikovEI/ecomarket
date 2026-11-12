@@ -86,8 +86,8 @@
 }
 
 .admin-highlight {
-    color: #74c69d !important;
-    font-weight: 700 !important;
+    color: #74c69d ;
+    font-weight: 700 ;
 }
 
 .footer-tips-widget {
@@ -108,14 +108,14 @@
 }
 
 .tip-container {
-    height: 56px !important;
-    min-height: 56px !important;
-    max-height: 56px !important;
+    height: 56px ;
+    min-height: 56px ;
+    max-height: 56px ;
     position: relative;
     overflow: hidden;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
+    display: flex ;
+    flex-direction: column ;
+    justify-content: center ;
 }
 
 .eco-tip {
