@@ -141,7 +141,7 @@ const verifyEmail = async (email, code) => {
 };
 
     return (
-        <AuthContext.Provider value={{ user, loading, login, register, logout,updateAvatar }}>
+        <AuthContext.Provider value={{ user, loading, login, register, logout,updateAvatar,verifyEmail}}>
             {!loading && children}
         </AuthContext.Provider>
     );

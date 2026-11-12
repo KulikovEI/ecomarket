@@ -19,7 +19,7 @@ $port = getenv('DB_PORT') ?: '5432';
 $db_name = getenv('DB_NAME') ?: 'ecomarket_db';
 $user = getenv('DB_USER') ?: 'user';
 $password = getenv('DB_PASSWORD') ?: 'user';
-$sslmode = getenv('DB_SSLMODE') ?: 'disable'; // Для Supabase ставим 'require'
+$sslmode = getenv('DB_SSLMODE') ?: 'disable'; 
 
 try {
     $dsn = "pgsql:host=$host;port=$port;dbname=$db_name;sslmode=$sslmode";
