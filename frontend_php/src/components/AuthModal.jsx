@@ -5,7 +5,9 @@ import { CartContext } from '../context/CartProvider.jsx';
 import '../styles/authModal.css';
 
 export default function AuthModal({ onClose }) {
-    const { login, register, verifyEmail } = useContext(AuthContext);
+
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+    const { login, register } = useContext(AuthContext);
     const { setNotification } = useContext(CartContext); 
 
     const [isSignUp, setIsSignUp] = useState(false);
@@ -103,21 +105,35 @@ export default function AuthModal({ onClose }) {
         }
     };
 
-    const handleVerifySubmit = async (e) => {
+     const handleVerifySubmit = async (e) => {
         e.preventDefault();
         setError(null);
 
-        if (verificationCode.trim().length !== 6) {
+        const cleanCode = verificationCode.trim();
+        if (cleanCode.length !== 6) {
             setError('Введите 6-значный код из письма!');
             return;
         }
 
         setLoading(true);
         try {
-            const success = await verifyEmail(pendingEmail, verificationCode.trim());
-            if (success) {
+            const response = await fetch(`${API_URL}/verify-email`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: pendingEmail, code: cleanCode }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Неверный код подтверждения.');
+            }
+
+            if (data.user) {
+                localStorage.setItem('app_user', JSON.stringify(data.user));
                 setNotification('Почта подтверждена! 🌱 Добро пожаловать в EcoMarket.');
                 onClose();
+                window.location.reload();
             }
         } catch (err) {
             setError(err.message || 'Неверный код подтверждения.');
